@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport meta tag to ensure proper responsiveness on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>User Registration and Login</title>
+    <style>
+        /* Resetting default margin, padding, and setting box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        /* Styling the body with background image and center alignment */
+        body {
+            width: 100%;
+            height: 100vh;
+            background-image: url(6938854_3402393.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Styling for registration and login forms */
+        .main,
+        .main1 {
+            width: 350px;
+            height: 320px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 5px black;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .user,
+        .user1 {
+            margin-bottom: 20px;
+        }
+
+        /* Inputs styling */
+        .user-name,
+        .user-name1 {
+            margin-bottom: 13px;
+        }
+
+        .user-input,
+        .user-input1 {
+            margin-bottom: 10px;
+        }
+
+        .user-input input,
+        .user-input1 input {
+            width: 100%;
+            height: 25px;
+            padding-left: 5px;
+        }
+
+        .password,
+        .password1 {
+            margin-bottom: 40px;
+        }
+
+        .password-name,
+        .password-name1 {
+            margin-bottom: 13px;
+        }
+
+        .password-input,
+        .password-input1 {
+            margin-bottom: 10px;
+        }
+
+        .password-input input,
+        .password-input1 input {
+            width: 100%;
+            height: 25px;
+            padding-left: 5px;
+        }
+
+        .submit {
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            background-color: cyan;
+        }
+
+        .submit:hover {
+            transition-duration: .7s;
+            background-color: rgba(0, 0, 0, 0.333);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- For Registration -->
+    <div class="main" id="registrationForm">
+        <h3>Registration Form</h3>
+        <div class="user">
+            <div class="user-name">Username :</div>
+            <div class="user-input"><input type="text" id="regUsername" required></div>
+        </div>
+        <div class="password">
+            <div class="password-name">Password :</div>
+            <div class="password-input"><input type="password" id="regPassword" required></div>
+        </div>
+        <div>
+            <button class="submit" onclick="register()">Submit</button>
+        </div>
+    </div>
+    <!-- For Login -->
+    <div class="main1" id="loginForm" style="display:none;">
+        <h3>Login Form</h3>
+        <div class="user1">
+            <div class="user-name1">User name :</div>
+            <div class="user-input1"><input type="text" id="loginUsername"></div>
+        </div>
+        <div class="password1">
+            <div class="password-name1">Password :</div>
+            <div class="password-input1"><input type="password" id="loginPassword"></div>
+        </div>
+        <div>
+            <button class="submit" onclick="login()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        // In-memory user storage
+        const users = {};
+
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (username && password) {
+                if (password.length >= 8) {
+                    users[username] = password;  // Storing user info
+                    alert('Registration successful!');
+                    // Hide registration form and show login form
+                    document.getElementById('registrationForm').style.display = 'none';
+                    document.getElementById('loginForm').style.display = 'block';
+                } 
+                else {
+                    alert('Password must be at least 8 characters long.');
+                }
+            } 
+            else {
+                alert('Please fill in all details!');
+            }
+        }
+
+
+        // Login function
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (users[username] && users[username] === password) {
+                alert('Login successful!');
+            }
+            else {
+                alert('Invalid username or password!');
+            }
+        }
+    </script>
+</body>
+
+</html>
