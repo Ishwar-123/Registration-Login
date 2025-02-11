@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport meta tag to ensure proper responsiveness on different devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration and Login</title>
     <style>
         /* Resetting default margin, padding, and setting box-sizing */
@@ -31,7 +30,7 @@
         .main,
         .main1 {
             width: 350px;
-            height: 320px;
+            height: auto;
             background-color: white;
             border-radius: 10px;
             padding: 20px;
@@ -102,6 +101,31 @@
             transition-duration: .7s;
             background-color: rgba(0, 0, 0, 0.333);
         }
+
+        /* Sign In/Sign Up links */
+        .sign-links {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .sign-links a {
+            color: cyan;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 5px;
+        }
+
+        .sign-links a:hover {
+            color: black;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .main, .main1 {
+                width: 90%; /* Forms take up 90% of the screen width on smaller devices */
+                height: auto;
+            }
+        }
     </style>
 </head>
 
@@ -120,6 +144,9 @@
         <div>
             <button class="submit" onclick="register()">Submit</button>
         </div>
+        <div class="sign-links">
+            <p>Already have an account? <a href="javascript:void(0);" onclick="showLogin()">Sign In</a></p>
+        </div>
     </div>
     <!-- For Login -->
     <div class="main1" id="loginForm" style="display:none;">
@@ -135,15 +162,19 @@
         <div>
             <button class="submit" onclick="login()">Submit</button>
         </div>
+        <div class="sign-links">
+            <p>Don't have an account? <a href="javascript:void(0);" onclick="showRegistration()">Sign Up</a></p>
+        </div>
     </div>
 
     <script>
         // In-memory user storage
         const users = {};
 
+        // Registration function with trim
         function register() {
-            const username = document.getElementById('regUsername').value;
-            const password = document.getElementById('regPassword').value;
+            let username = document.getElementById('regUsername').value.trim();
+            let password = document.getElementById('regPassword').value.trim();
 
             if (username && password) {
                 if (password.length >= 8) {
@@ -152,21 +183,20 @@
                     // Hide registration form and show login form
                     document.getElementById('registrationForm').style.display = 'none';
                     document.getElementById('loginForm').style.display = 'block';
-                } 
+                }
                 else {
                     alert('Password must be at least 8 characters long.');
                 }
-            } 
+            }
             else {
                 alert('Please fill in all details!');
             }
         }
 
-
-        // Login function
+        // Login function with trim
         function login() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
+            let username = document.getElementById('loginUsername').value.trim();
+            let password = document.getElementById('loginPassword').value.trim();
 
             if (users[username] && users[username] === password) {
                 alert('Login successful!');
@@ -174,6 +204,22 @@
             else {
                 alert('Invalid username or password!');
             }
+        }
+
+        // Function to show login form and hide registration
+        function showLogin() {
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        // Function to show registration form, hide login form, and reset login form
+        function showRegistration() {
+            // Clear the login form inputs
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registrationForm').style.display = 'block';
         }
     </script>
 </body>
