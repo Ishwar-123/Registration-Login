@@ -269,14 +269,17 @@
                 padding: 20px;
                 width: 85%;
             }
+            ::placeholder {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Registration Form -->
-        <div class="form-box backface-hidden" id="registrationForm">
-            <h3>Sign Up</h3>
+        <!-- Create Account Form -->
+        <div class="form-box backface-hidden" id="createAccountForm">
+            <h3>Create Account</h3>
             <div class="input-group">
                 <label for="regUsername">Username</label>
                 <input type="text" id="regUsername" placeholder="Enter your username" required>
@@ -287,13 +290,13 @@
             </div>
             <button class="submit-btn" onclick="register()">Register</button>
             <div class="links">
-                Already have an account? <a href="javascript:void(0);" onclick="showLogin()">Login</a>
+                Already have an account? <a href="javascript:void(0);" onclick="showSignIn()">Sign In</a>
             </div>
         </div>
 
-        <!-- Login Form -->
-        <div class="form-box backface-hidden" id="loginForm" style="display: none;">
-            <h3>Login</h3>
+        <!-- Sign In Form -->
+        <div class="form-box backface-hidden" id="signInForm" style="display: none;">
+            <h3>Sign In</h3>
             <div class="input-group">
                 <label for="loginUsername">Username</label>
                 <input type="text" id="loginUsername" placeholder="Enter your username">
@@ -304,7 +307,7 @@
             </div>
             <button class="submit-btn" onclick="login()">Sign In</button>
             <div class="links">
-                Don’t have an account? <a href="javascript:void(0);" onclick="showRegistration()">Sign Up</a>
+                Don’t have an account? <a href="javascript:void(0);" onclick="showCreateAccount()">Create Account</a>
             </div>
         </div>
     </div>
@@ -351,10 +354,10 @@
             }
 
             users[username] = password;
-            showModal('Success', 'Registration successful! You can now login.');
+            showModal('Success', 'Account created successfully! You can now sign in.');
             setTimeout(() => {
                 closeModal();
-                showLogin();
+                showSignIn();
             }, 2000);
         }
 
@@ -368,7 +371,7 @@
             }
 
             if (users[username] === password) {
-                showModal('Success', 'Login successful! Welcome, ' + username + '!');
+                showModal('Success', 'Sign in successful! Welcome, ' + username + '!');
                 setTimeout(() => {
                     closeModal();
                 }, 2000);
@@ -377,27 +380,27 @@
             }
         }
 
-        function showLogin() {
-            const regForm = document.getElementById('registrationForm');
-            const loginForm = document.getElementById('loginForm');
-            regForm.classList.add('flip');
+        function showSignIn() {
+            const createAccountForm = document.getElementById('createAccountForm');
+            const signInForm = document.getElementById('signInForm');
+            createAccountForm.classList.add('flip');
             setTimeout(() => {
-                regForm.style.display = 'none';
-                loginForm.style.display = 'block';
-                regForm.classList.remove('flip');
+                createAccountForm.style.display = 'none';
+                signInForm.style.display = 'block';
+                createAccountForm.classList.remove('flip');
             }, 500);
         }
 
-        function showRegistration() {
-            const regForm = document.getElementById('registrationForm');
-            const loginForm = document.getElementById('loginForm');
-            loginForm.classList.add('flip');
+        function showCreateAccount() {
+            const createAccountForm = document.getElementById('createAccountForm');
+            const signInForm = document.getElementById('signInForm');
+            signInForm.classList.add('flip');
             document.getElementById('loginUsername').value = '';
             document.getElementById('loginPassword').value = '';
             setTimeout(() => {
-                loginForm.style.display = 'none';
-                regForm.style.display = 'block';
-                loginForm.classList.remove('flip');
+                signInForm.style.display = 'none';
+                createAccountForm.style.display = 'block';
+                signInForm.classList.remove('flip');
             }, 500);
         }
 
